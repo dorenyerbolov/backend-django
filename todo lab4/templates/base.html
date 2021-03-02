@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'todo/css/main.css' %}" type="text/css"/>
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">BFDjango TODO</a>
+</nav>
+<div class="container">
+    <button type="button" class="btn btn-primary custom-btn">Add Task</button>
+    <table class="table custom-table">
+        <tr>
+            <th scope="row" class="custom-header">
+                {% block todo_list_title %}
+                {% endblock %}
+            </th>
+        </tr>
+    </table>
+    <table class="table">
+        <tr>
+            <th scope="col">Task</th>
+            <th scope="col">Created</th>
+            <th scope="col">Due on</th>
+            <th scope="col">Owner</th>
+            <th scope="col">Mark</th>
+        </tr>
+        {% for todo in todos %}
+            <tr>
+
+                <td>
+                    <a href="#">{{ todo.title }}</a>
+                </td>
+                <td>{{ todo.created }}</td>
+                <td>{{ todo.due_on }}</td>
+                <td>{{ todo.owner }}</td>
+                <td>
+                    <button type="button" class="btn btn-info">
+                        {{ todo.get_mark_display }}
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <button type="button" class="btn btn-warning">
+        {% block button %}
+        {% endblock %}
+    </button>
+    <button type="button" class="btn btn-danger">Delete this list</button>
+</div>
+</body>
+</html>
