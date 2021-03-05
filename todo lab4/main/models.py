@@ -18,8 +18,5 @@ class TodoItem(models.Model):
         verbose_name = 'Тудушка'
         verbose_name_plural = 'Тудушки'
 
-    def get_time_display(self, time):
-        return time.strftime('%d/%m/%Y')
-
     def __str__(self):
         return f"{self.title}"
