@@ -4,9 +4,11 @@ from main.models import TodoList, TodoItem
 
 
 class TodoItemSerializer(serializers.ModelSerializer):
+    owner_username = serializers.StringRelatedField(source='owner', read_only=True)
+
     class Meta:
         model = TodoItem
-        fields = '__all__'
+        exclude = ('owner', )
 
 
 class TodoRetrieveSerializer(serializers.ModelSerializer):
